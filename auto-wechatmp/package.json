@@ -1,0 +1,21 @@
+{
+  "name": "auto-wechatmp",
+  "version": "1.0.0",
+  "description": "微信公众号文章自动发布技能，支持 HTML/Markdown 文件发布，支持封面和作者设置，缺少参数时交互式询问",
+  "main": "src/auto-wechatmp.ts",
+  "scripts": {
+    "publish": "npx tsx src/auto-wechatmp.ts publish",
+    "draft": "npx tsx src/auto-wechatmp.ts draft",
+    "upload-cover": "npx tsx src/auto-wechatmp.ts upload-cover",
+    "list-drafts": "npx tsx src/auto-wechatmp.ts list-drafts",
+    "delete-draft": "npx tsx src/auto-wechatmp.ts delete-draft"
+  },
+  "keywords": ["wechat", "wechatmp", "publish", "auto"],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "sharp": "^0.34.5",
+    "undici": "^8.1.0"
+  }
+}

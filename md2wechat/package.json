@@ -1,0 +1,13 @@
+{
+  "name": "md2wechat",
+  "version": "1.0.0",
+  "description": "Markdown to WeChat Official Account HTML converter with inline styles",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "start": "tsx index.ts"
+  },
+  "dependencies": {
+    "marked": "^14.1.3"
+  }
+}
