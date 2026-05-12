@@ -125,7 +125,7 @@ const { html, theme } = await markdownToWechatHtml(markdownContent, {
 - **亮色（light）**：基于 GitHub 亮色主题，用于 `darkCode: false` 的主题
 - **暗色（dark）**：基于 GitHub 暗色主题，用于 `darkCode: true` 的主题
 
-流程：`highlight.js 高亮` → `替换 class 为内联 style` → `按行拆分 <code>` → `空格替换为 &nbsp;`
+流程：`highlight.js 高亮` → `替换 class 为内联 style` → `按行拆分 <code>` → `空格替换为 &nbsp;` → `还原转义实体（&#39;/&#x27; → '，&quot;/&#x22; → "）`
 
 ### 代码块格式
 

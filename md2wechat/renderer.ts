@@ -169,8 +169,13 @@ export class WechatRenderer extends Renderer {
       .map((line) => {
         const raw = line || "\u200B"; // 空行用零宽空格保底
         // 将 HTML 标签外的空格/tab 替换为 &nbsp;，微信编辑器不支持 white-space 属性
-        const content = raw.replace(/(<[^>]*>)|[ \t]/g, (m, tag) => tag || "&nbsp;");
-        return `<code style="font-size: 13px; font-family: 'SF Mono', Monaco, Consolas, 'Courier New', monospace; line-height: 1.6; color: ${this.c.codeTextColor}; display: block; white-space: pre; background-color: ${this.c.codeBg}; margin: 0;">${content}</code>`;
+        const content = raw
+          .replace(/(<[^>]*>)|[ \t]/g, (m, tag) => tag || "&nbsp;")
+          .replace(/&#39;/g, "'")
+          .replace(/&#x27;/g, "'")
+          .replace(/&quot;/g, '"')
+          .replace(/&#x22;/g, '"');
+        return `<code style="font-size: 13px; font-family: 'SF Mono', Monaco, Consolas, 'Courier New', monospace; line-height: 1.6; color: ${this.c.codeTextColor}; display: block; white-space: nowrap; background-color: ${this.c.codeBg}; margin: 0; width: max-content; max-width: unset !important;">${content}</code>`;
       })
       .join("\n");
 
@@ -180,7 +185,8 @@ ${codeLines}
   }
 
   codespan(token: any): string {
-    return `<code style="font-size: 14px; font-family: 'SF Mono', Monaco, Consolas, monospace; background-color: ${this.c.inlineCodeBg}; padding: 2px 6px; border-radius: 3px; color: ${this.c.inlineCodeTextColor};">${token.text}</code>`;
+    const text = token.text.replace(/&#39;/g, "'").replace(/&#x27;/g, "'").replace(/&quot;/g, '"').replace(/&#x22;/g, '"');
+    return `<code style="font-size: 14px; font-family: 'SF Mono', Monaco, Consolas, monospace; background-color: ${this.c.inlineCodeBg}; padding: 2px 6px; border-radius: 3px; color: ${this.c.inlineCodeTextColor};">${text}</code>`;
   }
 
   // ==================== 表格 ====================
@@ -420,7 +426,9 @@ ${codeLines}
   private _escapeInlineFormatting(text: string): string {
     return text
       .replace(/&quot;/g, '"')
+      .replace(/&#x22;/g, '"')
       .replace(/&#39;/g, "'")
+      .replace(/&#x27;/g, "'")
       .replace(
         /\*\*(.+?)\*\*/g,
         `<strong style="font-size: ${this.fs}; color: ${this.c.textColor};">$1</strong>`
