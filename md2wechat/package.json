@@ -8,6 +8,7 @@
     "start": "tsx index.ts"
   },
   "dependencies": {
+    "highlight.js": "^11.11.1",
     "marked": "^14.1.3"
   }
 }

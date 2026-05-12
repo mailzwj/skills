@@ -5,7 +5,8 @@
 ## 特性
 
 - 基于 `marked` 解析 Markdown，支持 GFM 语法
-- 6 种精美主题，覆盖品牌、科技、文艺、极简等风格
+- **14 种精美主题**，覆盖中国风、品牌、科技、文艺、极简、赛博朋克等风格
+- 基于 `highlight.js` 的代码语法高亮，class 自动转为内联 style
 - 全部内联样式，兼容微信公众号的严格过滤规则
 - 支持代码块、表格、引用、任务列表等复杂排版
 - 支持文章封面图、作者信息等元数据
@@ -18,7 +19,7 @@ cd md2wechat
 npm install
 ```
 
-依赖：`marked` (^14.1.3)，运行时需要 `tsx`。
+依赖：`marked` (^14.1.3)、`highlight.js`，运行时需要 `tsx`。
 
 ## CLI 使用
 
@@ -66,6 +67,8 @@ const { html } = await markdownToWechatHtml(markdownContent, {
 
 ## 主题一览
 
+### 原始 6 主题
+
 | 主题 key | 名称 | 主色 | 风格 |
 |----------|------|------|------|
 | `wechat-green` | 经典绿 | `#07c160` | 微信公众号品牌风格 |
@@ -74,6 +77,30 @@ const { html } = await markdownToWechatHtml(markdownContent, {
 | `warm-orange` | 文艺橙 | `#f97316` | 温暖治愈风 |
 | `minimal-bw` | 极简黑白 | `#000000` | 高级极简感 |
 | `fresh-gradient` | 清新渐变 | `#06b6d4` | 活力渐变风 |
+
+### 新增 8 主题
+
+| 主题 key | 名称 | 主色 | 风格 |
+|----------|------|------|------|
+| `chinese-red` | 中国红 | `#F25C54` | 朱红热烈 |
+| `chinese-style` | 中国风 | `#8b1e22` | 宣纸楷书、古典雅致 |
+| `byte-flavor` | 字节 | `#1677ff` | 字节跳动设计语言 |
+| `sunset` | 日落 | `#d78a54` | 日落暖棕、衬线文艺 |
+| `apple-style` | 苹果 | `#007aff` | Apple 极简风格 |
+| `cyberpunk` | 赛博 | `#8b5cf6` | 赛博朋克霓虹渐变 |
+| `sporty` | 运动风 | `#00A968` | 活力运动/户外 |
+| `warm-earth` | 暖土 | `#c86442` | 陶土温暖、默认通用 |
+
+## 代码语法高亮
+
+MD2WeChat 集成了 `highlight.js`，自动对代码块进行语法高亮。高亮颜色（class → 内联 style 映射）基于 GitHub 主题：
+
+- **亮色代码块**（`darkCode: false`）：GitHub 亮色主题颜色
+- **暗色代码块**（`darkCode: true`）：GitHub 暗色主题颜色
+
+微信公众号不支持 `<link>` 和 `class` 属性，因此高亮结果中的所有 `class="hljs-*"` 均已在转换时替换为 `style="..."` 内联属性。
+
+支持的编程语言：highlight.js 内建的全部语言（JavaScript、TypeScript、Python、Bash、Rust 等）。
 
 ## 为什么用内联样式
 
@@ -102,7 +129,9 @@ md2wechat/
 ├── package.json     # 依赖配置
 ├── index.ts         # 主入口：转换逻辑 + CLI
 ├── renderer.ts      # 自定义 marked 渲染器（内联样式生成）
-└── templates.ts     # 6 套主题配色配置
+├── templates.ts     # 14 套主题配色配置
+├── highlight.ts     # 代码语法高亮（highlight.js → 内联 style）
+└── templates/       # 8 套主题 HTML 模板参考
 ```
 
 ## 相关技能

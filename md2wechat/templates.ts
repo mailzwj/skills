@@ -3,6 +3,8 @@
  *
  * 每个主题定义一套颜色与样式参数，渲染器将按主题输出内联样式 HTML。
  * 微信公众号编辑器不支持 <style> 块，所有样式均在渲染时内联写入标签。
+ *
+ * 主题数量：14 个（6 个原始 + 8 个新增）
  */
 
 export interface ThemeConfig {
@@ -47,6 +49,8 @@ export interface ThemeConfig {
 // ==================== 主题定义 ====================
 
 export const THEMES: Record<string, ThemeConfig> = {
+  // ==================== 原始 6 个主题 ====================
+
   // ---- 经典绿（微信公众号品牌色）----
   "wechat-green": {
     name: "wechat-green",
@@ -183,6 +187,192 @@ export const THEMES: Record<string, ThemeConfig> = {
     h1Size: "22px",
     bodySize: "15px",
     darkCode: true,
+  },
+
+  // ==================== 新增 8 个主题（提取自 templates/ HTML 模板）====================
+
+  // ---- 中国红 ----
+  "chinese-red": {
+    name: "chinese-red",
+    label: "中国红",
+    primaryColor: "#F25C54",
+    secondaryColor: "#d94a4a",
+    textColor: "#2c2c2c",
+    mutedColor: "#555555",
+    codeBg: "#fafafa",
+    codeTextColor: "#333333",
+    inlineCodeBg: "#fdf0f0",
+    inlineCodeTextColor: "#c0392b",
+    blockquoteBg: "#fef9f8",
+    blockquoteBorder: "#F25C54",
+    tableHeaderBg: "#fef5f5",
+    tableOddBg: "#fffafa",
+    tableBorder: "#f5c0c0",
+    hrColor: "#f5b0b0",
+    h1Size: "22px",
+    bodySize: "15px",
+    darkCode: false,
+  },
+
+  // ---- 中国风 ----
+  "chinese-style": {
+    name: "chinese-style",
+    label: "中国风",
+    primaryColor: "#8b1e22",
+    secondaryColor: "#6b181a",
+    textColor: "#333333",
+    mutedColor: "#666666",
+    codeBg: "#faf8f5",
+    codeTextColor: "#302826",
+    inlineCodeBg: "#f2ebe0",
+    inlineCodeTextColor: "#8b1e22",
+    blockquoteBg: "#fdf8f5",
+    blockquoteBorder: "#8b1e22",
+    tableHeaderBg: "#f5efe4",
+    tableOddBg: "#faf7f2",
+    tableBorder: "#d4c5b0",
+    hrColor: "#c4a080",
+    h1Size: "22px",
+    bodySize: "15px",
+    darkCode: false,
+  },
+
+  // ---- 字节 ----
+  "byte-flavor": {
+    name: "byte-flavor",
+    label: "字节",
+    primaryColor: "#1677ff",
+    secondaryColor: "#05d4cd",
+    textColor: "#1d2129",
+    mutedColor: "#4e5969",
+    codeBg: "#f7f8fa",
+    codeTextColor: "#1d2129",
+    inlineCodeBg: "#e8f0ff",
+    inlineCodeTextColor: "#1677ff",
+    blockquoteBg: "#f2f3f5",
+    blockquoteBorder: "#05d4cd",
+    tableHeaderBg: "#1677ff",
+    tableOddBg: "#f7f8fa",
+    tableBorder: "#e5e6eb",
+    hrColor: "#c9cdd4",
+    h1Size: "22px",
+    bodySize: "15px",
+    darkCode: false,
+  },
+
+  // ---- 日落 ----
+  "sunset": {
+    name: "sunset",
+    label: "日落",
+    primaryColor: "#d78a54",
+    secondaryColor: "#a45a33",
+    textColor: "#3d2c1e",
+    mutedColor: "#6a4c38",
+    codeBg: "#f5e6d0",
+    codeTextColor: "#c0582a",
+    inlineCodeBg: "#f5e6d0",
+    inlineCodeTextColor: "#c0582a",
+    blockquoteBg: "#f9ecd9",
+    blockquoteBorder: "#d78a54",
+    tableHeaderBg: "#f5e6d0",
+    tableOddBg: "#faf3e8",
+    tableBorder: "#e8d5b8",
+    hrColor: "#d78a54",
+    h1Size: "22px",
+    bodySize: "15px",
+    darkCode: false,
+  },
+
+  // ---- 苹果 ----
+  "apple-style": {
+    name: "apple-style",
+    label: "苹果",
+    primaryColor: "#007aff",
+    secondaryColor: "#5856d6",
+    textColor: "#1d1d1f",
+    mutedColor: "#333333",
+    codeBg: "#fbfbfd",
+    codeTextColor: "#111827",
+    inlineCodeBg: "#ecebf8",
+    inlineCodeTextColor: "#4f46cf",
+    blockquoteBg: "#fafafa",
+    blockquoteBorder: "#007aff",
+    tableHeaderBg: "#f5f5f7",
+    tableOddBg: "#fafafa",
+    tableBorder: "#e5e5ea",
+    hrColor: "#d2d2d7",
+    h1Size: "22px",
+    bodySize: "15px",
+    darkCode: false,
+  },
+
+  // ---- 赛博 ----
+  "cyberpunk": {
+    name: "cyberpunk",
+    label: "赛博",
+    primaryColor: "#8b5cf6",
+    secondaryColor: "#f472b6",
+    textColor: "#1d1d1f",
+    mutedColor: "#333333",
+    codeBg: "#fbfbfd",
+    codeTextColor: "#17172a",
+    inlineCodeBg: "#ede8f8",
+    inlineCodeTextColor: "#8b5cf6",
+    blockquoteBg: "#fdf5fb",
+    blockquoteBorder: "#8b5cf6",
+    tableHeaderBg: "#f5f0fc",
+    tableOddBg: "#faf7fe",
+    tableBorder: "#e0d4f8",
+    hrColor: "#c4b5fd",
+    h1Size: "22px",
+    bodySize: "15px",
+    darkCode: false,
+  },
+
+  // ---- 运动风 ----
+  "sporty": {
+    name: "sporty",
+    label: "运动风",
+    primaryColor: "#00A968",
+    secondaryColor: "#FF6600",
+    textColor: "#2c2c2c",
+    mutedColor: "#3c3c3e",
+    codeBg: "#ffffff",
+    codeTextColor: "#1f2937",
+    inlineCodeBg: "#e6f5ee",
+    inlineCodeTextColor: "#008a56",
+    blockquoteBg: "#f8f8f8",
+    blockquoteBorder: "#00A968",
+    tableHeaderBg: "#e6f5ee",
+    tableOddBg: "#f5fbf8",
+    tableBorder: "#c8e6d4",
+    hrColor: "#a0d8c0",
+    h1Size: "22px",
+    bodySize: "15px",
+    darkCode: false,
+  },
+
+  // ---- 暖土 ----
+  "warm-earth": {
+    name: "warm-earth",
+    label: "暖土",
+    primaryColor: "#c86442",
+    secondaryColor: "#9f452c",
+    textColor: "#222222",
+    mutedColor: "#3f3f3f",
+    codeBg: "#fafaf9",
+    codeTextColor: "#3b342f",
+    inlineCodeBg: "#f5ede8",
+    inlineCodeTextColor: "#9f452c",
+    blockquoteBg: "#f7f7f7",
+    blockquoteBorder: "#c86442",
+    tableHeaderBg: "#f5ede8",
+    tableOddBg: "#faf8f5",
+    tableBorder: "#e0d5cc",
+    hrColor: "#d0c0b0",
+    h1Size: "22px",
+    bodySize: "15px",
+    darkCode: false,
   },
 };
 

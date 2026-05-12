@@ -1,3 +1,4 @@
 node_modules/
 dist/
 build/
+md2wechat/templates/

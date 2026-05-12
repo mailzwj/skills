@@ -8,6 +8,7 @@
 import { Renderer } from "marked";
 import type { ThemeConfig } from "./templates.ts";
 import { THEMES } from "./templates.ts";
+import { highlightCode } from "./highlight.ts";
 
 export class WechatRenderer extends Renderer {
   private theme: ThemeConfig;
@@ -157,20 +158,24 @@ export class WechatRenderer extends Renderer {
   // ==================== 代码 ====================
 
   code(token: any): string {
-    const lang = token.lang || "text";
-    const code = token.escape ? this.escape(token.text) : token.text;
-    const lines = code.split("\n");
+    const lang = token.lang || "";
+    const rawCode = token.text;
+    const hlTheme = this.c.darkCode ? "dark" : "light";
+    const highlighted = highlightCode(rawCode, lang, hlTheme);
+
+    // 按行拆分：微信编辑器会在单个 <code> 内折叠换行，每行独立 <code> 确保换行渲染正常
+    const lines = highlighted.split("\n");
     const codeLines = lines
-      .map(
-        (line: string) =>
-          `<code style="font-size: 13px; font-family: 'SF Mono', Monaco, Consolas, 'Courier New', monospace; display: block; line-height: 1.6;"><span leaf="">${line || "&nbsp;"}</span></code>`
-      )
+      .map((line) => {
+        const raw = line || "\u200B"; // 空行用零宽空格保底
+        // 将 HTML 标签外的空格/tab 替换为 &nbsp;，微信编辑器不支持 white-space 属性
+        const content = raw.replace(/(<[^>]*>)|[ \t]/g, (m, tag) => tag || "&nbsp;");
+        return `<code style="font-size: 13px; font-family: 'SF Mono', Monaco, Consolas, 'Courier New', monospace; line-height: 1.6; color: ${this.c.codeTextColor}; display: block; white-space: pre; background-color: ${this.c.codeBg}; margin: 0;">${content}</code>`;
+      })
       .join("\n");
 
-    return `<section style="margin: 14px 0; overflow-x: auto;">
-<pre class="code-snippet code-snippet_nowrap" data-lang="${lang}" style="margin: 0; white-space: pre; color: #1f2937;">
+    return `<section style="margin: 14px 0; overflow-x: auto; background-color: ${this.c.codeBg}; border-radius: 6px; padding: 14px 16px;" data-lang="${lang}">
 ${codeLines}
-</pre>
 </section>`;
   }
 
