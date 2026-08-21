@@ -4,6 +4,7 @@
 * `ace-caption-creator`：ACE-Step音乐生成大模型的“Caption”提示词生成技能
 * `wanvideo-prompt-creator`: 万相视频生成大模型的视频画面提示词生成技能
 * `ltx-prompt-designer`: LTX视频生成提示词设计技能
+* `cn-lyrics-writer`: 中文歌词创作技能
 
 ## 微信公众号
 * `md2wechat`: 将 Markdown 文件或文本转换为微信公众号编辑器兼容的 HTML。当用户需要发布微信公众号文章、将 Markdown 转为公众号格式、制作公众号排版时使用。支持 6 种主题风格，所有样式内联，可直接粘贴到微信公众平台编辑器。
