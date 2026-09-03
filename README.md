@@ -5,6 +5,18 @@
 * `wanvideo-prompt-creator`: 万相视频生成大模型的视频画面提示词生成技能
 * `ltx-prompt-designer`: LTX视频生成提示词设计技能
 * `cn-lyrics-writer`: 中文歌词创作技能
+* **`3d-animation-short-spec`**: 3D皮克斯风格动画短片生成技能
+
+## 3d-animation-short-spec
+3D皮克斯风格动画短片生成技能。基于[MiniMax-H3/skills/3d-animation-short-generator](https://github.com/MiniMax-AI/MiniMax-H3/tree/main/skills/3d-animation-short-generator)改写。与原技能异同对比如下：
+
+| 维度 | generator（MiniMax-H3） | spec（当前技能） |
+|---|---|---|
+| 输出产物 | 完整动画短片（图像+视频+成片） | 仅提示词/规格文档 |
+| 角色卡 | 直接生成图像 | 只写 QwenImage 提示词 |
+| 场景卡 | 直接生成图像 | 只写 QwenImage 提示词 |
+| 视频 | 直接调用模型渲染 | 只写 H3 ref2va 提示词 |
+| 适用场景 | 端到端生产 | 提示词规划 / 下游交付 |
 
 ## 微信公众号
 * `md2wechat`: 将 Markdown 文件或文本转换为微信公众号编辑器兼容的 HTML。当用户需要发布微信公众号文章、将 Markdown 转为公众号格式、制作公众号排版时使用。支持 6 种主题风格，所有样式内联，可直接粘贴到微信公众平台编辑器。
