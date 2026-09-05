@@ -6,6 +6,7 @@
 * `ltx-prompt-designer`: LTX视频生成提示词设计技能
 * `cn-lyrics-writer`: 中文歌词创作技能
 * **`3d-animation-short-spec`**: 3D皮克斯风格动画短片生成技能
+* `h3-comic-pv`: H3 动漫 PV 包装技能
 
 ## 3d-animation-short-spec
 3D皮克斯风格动画短片生成技能。基于[MiniMax-H3/skills/3d-animation-short-generator](https://github.com/MiniMax-AI/MiniMax-H3/tree/main/skills/3d-animation-short-generator)改写。与原技能异同对比如下：
