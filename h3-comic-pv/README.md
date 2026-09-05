@@ -1,6 +1,6 @@
 # H3 Comic PV
 
-> Created by 迪威
+> Created by 迪威\
 > 本仓库从[https://github.com/fadeaway20242024/H3-comic-pv](https://github.com/fadeaway20242024/H3-comic-pv)复刻，优化了其中部分细节（比如：移除原作者身份路径等）。
 
 **H3 动漫 PV 包装导演 / H3 Anime PV Packaging Director**
