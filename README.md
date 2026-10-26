@@ -8,6 +8,7 @@
 * **`3d-animation-short-spec`**: 3D皮克斯风格动画短片生成技能
 * `h3-comic-pv`: H3 动漫 PV 包装技能
 * `high-density-fight-prompt`: 高密度动态打斗提示词生成技能
+* `acestep-songwriting`: ACE-Step-1.5歌曲创作SKILL
 
 ## 3d-animation-short-spec
 3D皮克斯风格动画短片生成技能。基于[MiniMax-H3/skills/3d-animation-short-generator](https://github.com/MiniMax-AI/MiniMax-H3/tree/main/skills/3d-animation-short-generator)改写。与原技能异同对比如下：
