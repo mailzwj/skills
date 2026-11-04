@@ -1,6 +1,6 @@
 ---
 name: h3-mv-spec
-description: 输入歌曲时长、歌名、歌词、歌手信息及歌手形象参考图，输出符合歌曲意境与情绪曲线的 MV 分镜表及 MiniMax H3 视频生成提示词。自动判断歌手是否出镜，统一全片镜头与艺术风格；提供歌词时间线时严格对齐歌词出现时间（秒数四舍五入取整）切分镜头；歌手出镜分镜升级为参考音频生视频：直接复用参考音频 <Audio 1> 作为完整最终音轨（不重新生成、不修改），画面中歌手仅做口型同步并随其中的歌声严格对齐。以 Markdown 文档返回分镜数量与每个分镜的时长、起止时间区间和提示词信息。
+description: 输入歌曲时长、歌名、歌词、歌手信息及歌手形象参考图，输出符合歌曲意境与情绪曲线的 MV 分镜表及 MiniMax H3 视频生成提示词。自动判断歌手是否出镜，统一全片镜头与艺术风格；首个分镜强制包含歌名与歌手名的展示动效（泼墨豪放手写或尖角刀锋艺术字体，随机取一，颜色布局与画面协调）；提供歌词时间线时严格对齐歌词出现时间（秒数四舍五入取整）切分镜头；歌手出镜分镜升级为参考音频生视频：直接复用参考音频 <Audio 1> 作为完整最终音轨（不重新生成、不修改），画面中歌手仅做口型同步并随其中的歌声严格对齐。以 Markdown 文档返回分镜数量与每个分镜的时长、起止时间区间和提示词信息。
 ---
 
 ## 1. 角色
@@ -54,6 +54,7 @@ description: 输入歌曲时长、歌名、歌词、歌手信息及歌手形象�
    - 标注：分镜号(shot_number)、起止时间(start_time/end_time)、时长(duration)、对应歌词(lyrics)、视频生成提示词(prompt，包括：情绪、画面内容、是否出现歌手、镜头运动、转场、声音设计等)。
 
 4. **生成提示词**  
+   - **首个分镜（Shot 1）强制带标题动效**：按 5.4 生成歌名 + 歌手名的展示动效，字体在本片内随机锁定一种艺术字体样式，文字颜色与布局与画面协调。  
    - 若该分镜不出现歌手：生成 T2VA 提示词。  
    - 若该分镜出现歌手：生成 Ref2VA 提示词并升级为参考音频生视频（audio reuse）——引用歌手参考图 `<Picture 1>`，同时引用参考音频 `<Audio 1>`（默认用户已提供参考音频，无需询问、无需依赖其他输入）；`summary` 任务类型写 `[reference generation + audio reuse]`，`retention_analysis` 中 `<Audio 1>` 标记 `fully_copy`，声明其原样复用为完整最终音轨，不重新生成、不修改任何歌声 / 音乐 / 音效；画面中的歌手仅做口型同步，随 `<Audio 1>` 中的歌声逐字严格对齐。
    - 每个分镜提示词完全独立，镜头号均从 `[Shot 1]` 开始。  
@@ -144,13 +145,31 @@ non_diegetic_music:
 The instrumental backing of <Audio 1> is directly reused unchanged as the complete score of the target video, with instrumentation, tempo, rhythm, and dynamics exactly as in the reference; no new music is generated.
 ```
 
+### 5.4 首个分镜标题动效（硬约束）
+第一个分镜（Shot 1，起止 00:00）的视频提示词必须包含歌曲名称与歌手名称的展示动效（标题动画），不可缺失、不可推迟到后续分镜。
+
+- **文字内容**：歌名为主标题、歌手名为副标题，逐字使用原文，放入英文双引号，不翻译、不改写（与 5.1 屏幕可见文字规则一致）。
+- **字体样式（随机取一，全片首镜只用一种）**：每次生成本技能产出时，在以下两种样式中随机选定一种并写入提示词，并在分镜表末尾注明本次选用的样式；同一项目内不得混搭、不得在多个镜头间切换。
+  - 样式 A「泼墨豪放手写艺术字体」：`dynamic ink-splash brush calligraphy, hand-written with flying-white strokes and scattered wet ink droplets, vigorous and unrestrained`；
+  - 样式 B「尖角刀锋艺术字体」：`blade-sharp angular display typeface with beveled edges, razor-thin tapered points and hard geometric cuts`。
+- **展示动效**：文字以动画方式入场并短暂停留，写清出现方式（如墨迹晕染/笔锋书写轨迹描出，或刀锋划痕/锐角碎片逐字拼合）、出现节奏与退场方式；动效风格与全片统一艺术风格、歌曲情绪曲线一致。
+- **颜色与布局协调（必须写明）**：字色从本片主色调或画面光源派生，与背景保持可读对比但不刺眼；布局考虑主体避让、安全边距与视觉重心，明确文字在画面中的位置与占比（如居中留白、偏下三分之一、与主体错位的负空间）。
+- **音画处理**：标题动效不引入新的声音元素——歌手出镜的音频复用分镜（`<Audio 1>` `fully_copy`）保持音轨不变；纯 T2VA 前奏镜头按歌曲已有的器乐/氛围声描述，禁止为标题额外生成音效或配乐。
+- **歌手出镜的首个分镜**：标题动效写入该 Ref2VA 提示词的 `detailed_description` 对应镜头中（歌名/歌手名以双引号逐字给出），`summary`、`retention_analysis` 与音频复用声明保持不变。
+
+首个分镜 T2VA 提示词中的标题动效写法示例（替换尖括号占位，保持三字段格式不变）：
+```text
+integrated_multimodal_description:
+[Shot 1] <统一风格句>，<景别>，<标题动效：song title "<歌名>" rendered in <所选字体样式英文描述> appears with <入场动效>, followed by singer credit "<歌手名>" in the same typeface at <位置>, <字色与画面对比/派生关系>，<布局与避让>>, <环境>, <镜头运动>, <声音：仅歌曲已有的器乐或氛围声>。
+```
+
 ## 6. 输出 Markdown 文档
 最终只返回分镜信息及各分镜提示词内容，不包含其他内容：
 ```text
 # MV 分镜表
 ## Shot 1，起止时间：00:00 - 00:05，时长：5秒
 integrated_multimodal_description:
-[Shot 1] <统一风格句>，<景别>，<主体>，<动作>，<环境>，<镜头运动>，<声音>。
+[Shot 1] <统一风格句>，<景别>，<标题动效：song title "<歌名>" and singer credit "<歌手名>" in <所选字体样式英文描述>，<入场动效>，<字色>，<位置与布局>>，<环境>，<镜头运动>，<声音>。
 
 overall_soundscape: N/A
 
@@ -214,4 +233,5 @@ MV 风格若未提供，我将根据歌词内容自动匹配，无需确认。
 - 歌手出镜分镜使用 Ref2VA（参考音频生视频）：同时引用 `<Picture 1>` 与 `<Audio 1>`；`summary` 为 `[reference generation + audio reuse]`，`<Audio 1>` 标记 `fully_copy`（原样复用为完整最终音轨，不重新生成、不修改）；写明口型随歌声严格对齐且歌手不成为独立发声源；不出镜分镜使用 T2VA。
 - 歌手出镜分镜的 `overall_soundscape` / `non_diegetic_music` 不含任何新生成的声音或音乐，仅指向 `<Audio 1>` 的原样复用或 N/A。
 - 全片风格统一，画风不混乱。
-- 最终返回合法 Markdown 文档。
+- 首个分镜（Shot 1）含歌名 + 歌手名展示动效：两种艺术字体样式中随机锁定一种且全片一致，歌名与歌手名原文逐字加英文双引号不翻译，动效与情绪/风格匹配，字色与布局已写明且与画面协调；未额外生成标题音效或配乐。
+- 最终返回合法 Markdown 文档，并在文档末尾注明本次随机选用的字体样式（A 泼墨豪放手写 / B 尖角刀锋）。
