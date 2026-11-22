@@ -1,14 +1,15 @@
 # 仓库说明
 
 ## 提示词生成
-* `ace-caption-creator`：ACE-Step音乐生成大模型的“Caption”提示词生成技能
+* `ace-caption-creator`：ACE-Step 音乐生成大模型的“Caption”提示词生成技能
 * `wanvideo-prompt-creator`: 万相视频生成大模型的视频画面提示词生成技能
-* `ltx-prompt-designer`: LTX视频生成提示词设计技能
+* `ltx-prompt-designer`: LTX 视频生成提示词设计技能
 * `cn-lyrics-writer`: 中文歌词创作技能
-* **`3d-animation-short-spec`**: 3D皮克斯风格动画短片生成技能
+* **`3d-animation-short-spec`**: 3D 皮克斯风格动画短片生成技能
 * `h3-comic-pv`: H3 动漫 PV 包装技能
 * `high-density-fight-prompt`: 高密度动态打斗提示词生成技能
-* `acestep-songwriting`: ACE-Step-1.5歌曲创作SKILL
+* `acestep-songwriting`: ACE-Step-1.5 歌曲创作 SKILL
+* `minimax-h3-action-prompt`: MiniMax H3打斗提示词生成技能，配合 `wushu_action` LoRA使用
 
 ## 3d-animation-short-spec
 3D皮克斯风格动画短片生成技能。基于[MiniMax-H3/skills/3d-animation-short-generator](https://github.com/MiniMax-AI/MiniMax-H3/tree/main/skills/3d-animation-short-generator)改写。与原技能异同对比如下：
