@@ -6,6 +6,7 @@
 * `ltx-prompt-designer`: LTX 视频生成提示词设计技能
 * `cn-lyrics-writer`: 中文歌词创作技能
 * **`3d-animation-short-spec`**: 3D 皮克斯风格动画短片生成技能
+* **`chinese-3d-animation-spec`**: 国风 3D 动画短片生成技能
 * `h3-comic-pv`: H3 动漫 PV 包装技能
 * `high-density-fight-prompt`: 高密度动态打斗提示词生成技能
 * `acestep-songwriting`: ACE-Step-1.5 歌曲创作 SKILL
